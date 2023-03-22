@@ -27,21 +27,20 @@ export function enqueueImage(url: string) {
 }
 
 export async function downloadImages() {
-  return;
-  // console.info(`Downloading images... (total: ${downloadList.length})`);
-  // let count = 0;
-  // for (const item of downloadList) {
-  //   count++;
-  //   try {
-  //     if (fs.existsSync(item.dest)) {
-  //       console.info(`Skip downloading ${item.url} to ${item.dest}`);
-  //       continue;
-  //     }
-  //     await download.image({ url: item.url, dest: item.dest });
-  //     console.log(`Downloaded ${item.url} to ${item.dest} (${count}/${downloadList.length})`);
-  //     await new Promise(s => setTimeout(s, 200 + randomInt(2500)));
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // }
+  console.info(`Downloading images... (total: ${downloadList.length})`);
+  let count = 0;
+  for (const item of downloadList) {
+    count++;
+    try {
+      if (fs.existsSync(item.dest)) {
+        console.info(`Skip downloading ${item.url} to ${item.dest}`);
+        continue;
+      }
+      await download.image({ url: item.url, dest: item.dest });
+      console.log(`Downloaded ${item.url} to ${item.dest} (${count}/${downloadList.length})`);
+      await new Promise(s => setTimeout(s, 200 + randomInt(2500)));
+    } catch (e) {
+      console.error(e);
+    }
+  }
 }

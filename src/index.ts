@@ -13,7 +13,7 @@ export async function run() {
   fs.mkdirSync('output', { recursive: true });
   fs.mkdirSync('output/assets', { recursive: true });
   for (const page of data.pages) {
-    const parsed = parse(page.lines.join('\n'), {
+    const parsed = parse(page.lines.map((l: { text: string; }) => l.text).join('\n'), {
       hasTitle: true,
     });
     // console.log(parsed);
